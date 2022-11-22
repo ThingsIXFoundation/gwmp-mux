@@ -12,4 +12,3 @@ This program, gwmp-mux, allows for a single packet forwarder connection to
 be multiplexed out to one or more potential hosts. As such, a single gateway
 can connect to multiple LNSs. For example the above gateway-rs and forwarder 
 an be used on the same gateway.
-

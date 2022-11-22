@@ -10,7 +10,7 @@ use std::io;
 use std::net::SocketAddr;
 use std::str::FromStr;
 use structopt::StructOpt;
-use tokio::{io::AsyncReadExt, signal, time::Duration};
+use tokio::{signal, time::Duration};
 
 mod gwmp_mux;
 use gwmp_mux::*;
@@ -74,12 +74,9 @@ fn main() {
 }
 
 async fn watch_for_shutdown() {
-    let mut in_buf = [0u8; 64];
-    let mut stdin = tokio::io::stdin();
     loop {
         tokio::select!(
             _ = signal::ctrl_c() => return,
-            read = stdin.read(&mut in_buf) => if let Ok(0) = read { return },
         )
     }
 }

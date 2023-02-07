@@ -18,10 +18,9 @@ impl Client {
         let mut clients = Vec::new();
         let (shutdown_trigger, shutdown_signal) = triggered::trigger();
         for address in client_list {
-            let socket = SocketAddr::from_str(address)?;
             let (sender, receiver, udp_runtime) =
-                client_runtime::UdpRuntime::new(mac, socket).await?;
-            info!(logger, "Connecting to server {socket} on behalf of {mac}",);
+                client_runtime::UdpRuntime::new(mac, address).await?;
+            info!(logger, "Connecting to server {address} on behalf of {mac}",);
             let handle = tokio::spawn(run_client_instance(
                 shutdown_signal.clone(),
                 udp_runtime,

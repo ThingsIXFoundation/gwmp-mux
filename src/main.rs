@@ -8,7 +8,6 @@ use slog::{self, debug, error, info, o, warn, Drain, Logger};
 use std::collections::HashMap;
 use std::io;
 use std::net::SocketAddr;
-use std::str::FromStr;
 use structopt::StructOpt;
 use tokio::{signal, time::Duration};
 
@@ -26,7 +25,7 @@ pub struct Opt {
     /// port to host the service on
     #[structopt(long, default_value = "1681")]
     pub host: u16,
-    /// addresses to be clients to (eg: 127.0.0.1:1680)
+    /// addresses to be clients to (eg: 127.0.0.1:1680 or hostname:1680)
     /// WARNING: all addresses will receive all ACKs for transmits
     #[structopt(long, default_value = "127.0.0.1:1680")]
     pub client: Vec<String>,
